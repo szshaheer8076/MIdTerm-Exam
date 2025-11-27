@@ -7,7 +7,7 @@ export default function App() {
   const [displayMode, setDisplayMode] = useState(''); // 'full' or 'random'
 
   // Base URL for your backend - adjust if using a physical device/emulator
-  const API_BASE_URL = 'http://192.168.1.9:3000';
+  const API_BASE_URL = 'http://192.168.1.112:3000';
 
   // For Android Emulator: 'http://10.0.2.2:3000'
   // For Physical Device on same network: 'http://YOUR_LOCAL_IP:3000'
