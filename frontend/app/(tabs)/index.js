@@ -4,17 +4,15 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert } from 'react
 
 export default function App() {
   const [menuData, setMenuData] = useState([]);
-  const [displayMode, setDisplayMode] = useState(''); // 'full' or 'random'
+  const [displayMode, setDisplayMode] = useState('');
 
-  // Base URL for your backend - adjust if using a physical device/emulator
-  const API_BASE_URL = 'http://192.168.1.112:3000';
-
-  // For Android Emulator: 'http://10.0.2.2:3000'
-  // For Physical Device on same network: 'http://YOUR_LOCAL_IP:3000'
+  // Use /api because Vercel serverless API is always /api/*
+  const API_BASE_URL = 'https://coffeeshop-git-main-shaheers-projects-6d04e7f2.vercel.app/api';
 
   const fetchFullMenu = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/menu`);
+
       const data = await response.json();
       setMenuData(data);
       setDisplayMode('full');
@@ -28,7 +26,7 @@ export default function App() {
     try {
       const response = await fetch(`${API_BASE_URL}/menu/random`);
       const data = await response.json();
-      // Display the single random item as an array for the FlatList
+
       setMenuData([data]);
       setDisplayMode('random');
     } catch (error) {
@@ -41,7 +39,7 @@ export default function App() {
     <View style={styles.itemCard}>
       <Text style={styles.itemName}>{item.name}</Text>
       <Text style={styles.itemDetails}>Category: {item.category}</Text>
-      <Text style={styles.itemDetails}>Price: Rs. {item.price.toFixed(2)}</Text>
+      <Text style={styles.itemDetails}>Price: Rs. {item.price?.toFixed(2)}</Text>
       <Text style={[styles.itemDetails, { color: item.inStock ? 'green' : 'red' }]}>
         {item.inStock ? 'In Stock' : 'Out of Stock'}
       </Text>
@@ -62,15 +60,13 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
-      {/* Display appropriate heading based on mode */}
       {displayMode === 'full' && <Text style={styles.subtitle}>All Menu Items:</Text>}
       {displayMode === 'random' && <Text style={styles.subtitle}>Your Surprise Item:</Text>}
 
-      {/* Display the list of items (either all or the single random one) */}
       <FlatList
         data={menuData}
         renderItem={renderMenuItem}
-        keyExtractor={(item) => item._id || item.name} // Use MongoDB _id if available
+        keyExtractor={(item) => item._id || item.name}
         style={styles.list}
       />
       
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 30,
-    color: '#6F4E37', // Coffee brown color
+    color: '#6F4E37',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -125,10 +121,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 5,
     marginHorizontal: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
     elevation: 2,
   },
   itemName: {
