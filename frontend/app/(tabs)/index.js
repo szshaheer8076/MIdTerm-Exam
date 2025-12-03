@@ -7,7 +7,7 @@ export default function App() {
   const [displayMode, setDisplayMode] = useState('');
 
   // Use /api because Vercel serverless API is always /api/*
-  const API_BASE_URL = 'https://coffeeshop-git-main-shaheers-projects-6d04e7f2.vercel.app/api';
+  const API_BASE_URL = 'https://coffeeshop-git-main-shaheers-projects-6d04e7f2.vercel.app';
 
   const fetchFullMenu = async () => {
     try {

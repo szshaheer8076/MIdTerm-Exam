@@ -1,2 +1,6 @@
-const app = require('./server');
-module.exports = (req, res) => app(req, res);
+// api/index.js
+const app = require('../server'); // server.js is one level up from api/
+
+module.exports = (req, res) => {
+  return app(req, res);
+};
