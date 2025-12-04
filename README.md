@@ -34,3 +34,4 @@ npm start
 cd ../frontend
 npm install
 npx expo start
+https://youtube.com/shorts/v7eH34vwToA?si=7b2VCPFm6vfmxrYD
